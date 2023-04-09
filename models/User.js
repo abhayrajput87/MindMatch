@@ -19,14 +19,36 @@ const UserSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        required:true, //It haas to be required
+        required:true
+        , //It haas to be required
         min:2,
         max:50,
         unique: true
     },
-    picturePath: {
-        type:String,
-        default:[]
+    password:{
+     type:String,
+     required:true.valueOf,
+     min:5
     },
 
+    picturePath: {
+        type:String,
+        default:""
+    },
+
+    friends: {
+        type: Array,
+        default:[]
+    },
+    location : String,
+    occupation : String,
+    viewedProfile:Number,
+    impressions: Number,
+
+},{
+    timestamps:true
 })
+
+const User=mongoose.model("User", UserSchema)
+
+export default User;

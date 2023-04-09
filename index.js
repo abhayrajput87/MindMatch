@@ -9,6 +9,8 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js"
+import authroutes from "./routes/auth.js"
+import userroutes from "./routes/users.js"
 /* CONFIGURATION */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname =path.dirname(__filename);
@@ -40,9 +42,11 @@ const upload =multer({storage});
 /* ROUTES WITH FILES */
 // upload.single() is a middleware which is used to upload picture
 
-app.post("/auth/register", upload.single("picture"),register )
+app.post("/auth/register", upload.single("picture"), register )
 
-
+/* ROUTES */
+app.use("/auth" ,authroutes);
+app.use("/users", userroutes);
 
 /* MONGOOSE SETUP*/
 mongoose.set('strictQuery', true);
