@@ -11,6 +11,11 @@ import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js"
 import authroutes from "./routes/auth.js"
 import userroutes from "./routes/users.js"
+import postroutes from "./routes/posts.js"
+import { createPost } from "./controllers/posts.js"
+import { verifyToken } from "./middleware/auth.js";
+
+
 /* CONFIGURATION */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname =path.dirname(__filename);
@@ -39,14 +44,22 @@ const storage = multer.diskStorage({
   
 const upload =multer({storage});
 
+
+
 /* ROUTES WITH FILES */
 // upload.single() is a middleware which is used to upload picture
 
 app.post("/auth/register", upload.single("picture"), register )
+app.post("/posts",verifyToken ,upload.single("picture"), createPost)
+
+
 
 /* ROUTES */
+
 app.use("/auth" ,authroutes);
 app.use("/users", userroutes);
+app.use("/posts",postroutes)
+
 
 /* MONGOOSE SETUP*/
 mongoose.set('strictQuery', true);
@@ -60,4 +73,6 @@ const connect= async ()=>{
     process.exit(1)
 }
 };
+
+
 app.listen(3000,()=>console.log("connected"))
