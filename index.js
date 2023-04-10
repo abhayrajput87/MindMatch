@@ -15,6 +15,10 @@ import postroutes from "./routes/posts.js"
 import { createPost } from "./controllers/posts.js"
 import { verifyToken } from "./middleware/auth.js";
 
+import User from "./models/User.js";
+import Post from "./models/post.js";
+import { users,posts } from "./data/index.js";
+
 
 /* CONFIGURATION */
 const __filename = fileURLToPath(import.meta.url);
@@ -60,11 +64,14 @@ app.use("/auth" ,authroutes);
 app.use("/users", userroutes);
 app.use("/posts",postroutes)
 
-
+app.get("/",(req,res)=>{
+  User.insertMany(users);
+})
 /* MONGOOSE SETUP*/
 mongoose.set('strictQuery', true);
 const connect= async ()=>{
     try{
+      
     const connect=await mongoose.connect(process.env.MONGO_URL) // We replace special character using percent encoding if it is present in username or password
     console.log('Congratulations! MongoDb is conected')
 }catch(e)
@@ -73,6 +80,7 @@ const connect= async ()=>{
     process.exit(1)
 }
 };
+connect();
 
 
 app.listen(3000,()=>console.log("connected"))
