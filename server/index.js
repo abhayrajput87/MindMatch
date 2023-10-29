@@ -64,9 +64,7 @@ app.use("/auth" ,authroutes);
 app.use("/users", userroutes);
 app.use("/posts",postroutes)
 
-app.get("/",(req,res)=>{
-  User.insertMany(users);
-})
+
 /* MONGOOSE SETUP*/
 mongoose.set('strictQuery', true);
 const connect= async ()=>{
@@ -83,4 +81,4 @@ const connect= async ()=>{
 connect();
 
 
-app.listen(3000,()=>console.log("connected"))
+app.listen(3001,()=>console.log("connected"))

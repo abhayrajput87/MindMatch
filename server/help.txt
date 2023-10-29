@@ -1,0 +1,18 @@
+jsx-js file that have component
+#jwt and bcrypt
+bcrypt is used to just hash the password
+***JWT***
+jwt is just used for authorization(is making sure that a user sent request to user is still logged in ) and not for authentication(logging a user in(to make sure username and password is correct))
+{Normally authorization is done using sessions(sessionId->cookies of the browser->everytime we makes a request to server->session_id sent to the server by cookies->server checks their memory-> if it finds a match->we login)
+In sessions, server stored the session_id in server memory
+}
+In Jwt, instead of cookies it uses JSON web token
+In jwt, nothing is stored in the server
+JWT_>1.header,2.payload,3.verify signature
+
+We can put anything about the user in jwt
+
+
+##########REDUX#############
+It's state management library(open-source javascript library)
+It provides cenntralized store(component direct access the data)
