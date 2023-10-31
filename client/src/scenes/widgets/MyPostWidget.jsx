@@ -155,7 +155,7 @@ import {
           )}
   
           <Button
-            disabled={!post}
+            disabled={!post}  //So that no post will be posted without having description
             onClick={handlePost}
             sx={{
               color: palette.background.alt,
