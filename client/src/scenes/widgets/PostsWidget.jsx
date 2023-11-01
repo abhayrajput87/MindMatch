@@ -26,6 +26,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
       }
     );
     const data = await response.json();
+    
     dispatch(setPosts({ posts: data }));
   };
 
@@ -53,6 +54,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
           comments,
         }) => (
           <PostWidget
+       
             key={_id}
             postId={_id}
             postUserId={userId}
@@ -63,6 +65,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             userPicturePath={userPicturePath}
             likes={likes}
             comments={comments}
+          
           />
         )
       )}

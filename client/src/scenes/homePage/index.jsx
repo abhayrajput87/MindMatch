@@ -2,6 +2,8 @@ import { Box, useMediaQuery } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux';
 import Navbar from 'scenes/navbar'
+import AdvertWidget from 'scenes/widgets/AdvertWidget';
+import FriendListWidget from 'scenes/widgets/FriendListWidget';
 import MyPostWidget from 'scenes/widgets/MyPostWidget';
 import PostsWidget from 'scenes/widgets/PostsWidget';
 import UserWidget from 'scenes/widgets/UserWidget';
@@ -33,6 +35,8 @@ function HomePage() {
         </Box>
         {isNonMobileScreens && (
           <Box flexBasis="26%">
+            <AdvertWidget/>
+            <FriendListWidget userId={_id}/>
           </Box>
         )}
 
