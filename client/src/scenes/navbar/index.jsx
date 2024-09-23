@@ -26,60 +26,65 @@ import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 
 function Navbar() {
-
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) =>  {return state.user});
-  
-  //This is a hook built into material UI that allows us to determine if the current screen size of the user 
-  //is below this min wiidth or higher than minwidth 
+  const user = useSelector((state) => {
+    return state.user;
+  });
+
+  //This is a hook built into material UI that allows us to determine if the current screen size of the user
+  //is below this min wiidth or higher than minwidth
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   //this will allow us to go back to theme.js file
   const theme = useTheme();
-  
-  
+
   const neutralLight = theme.palette.neutral.light;
   const dark = theme.palette.neutral.dark;
   const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
- const fullName = `${user.firstName} ${user.lastName}`;
+  const fullName = `${user.firstName} ${user.lastName}`;
 
-
- 
- 
-    return (
-        // padding 1 rem top & bottom and 6% left and right
-    <FlexBetween padding="1rem 6%" backgroundColor={alt} >
-    <FlexBetween gap='1.75rem'>
+  return (
+    // padding 1 rem top & bottom and 6% left and right
+    <FlexBetween padding="1rem 6%" backgroundColor={alt}>
+      <FlexBetween gap="1.75rem">
         {/* clamp is a function which have (min value,preferred value,max value)  */}
-        <Typography fontWeight="bold" fontSize="clamp(1rem,2rem,2.25rem)" color="primary"
-        onClick={()=>{navigate("/home")}}
-        sx={{
-            "&:hover":{
-                color:primaryLight,
-                cursor:"pointer",
-            }
-        }}
+        <Typography
+          fontWeight="bold"
+          fontSize="clamp(1rem,2rem,2.25rem)"
+          color="primary"
+          onClick={() => {
+            navigate("/home");
+          }}
+          sx={{
+            "&:hover": {
+              color: primaryLight,
+              cursor: "pointer",
+            },
+          }}
         >
-            MindMatch
+          MindMatch
         </Typography>
         {/* If it's not mobile screens we are going to show searchbars*/}
-        {isNonMobileScreens &&(
-            <FlexBetween backgroundColor={neutralLight} borderRadius="9px" gap="3rem" padding=" 0.1rem 1.5rem" >
-                 <InputBase placeholder="Search..." />
-                 <IconButton>
-                    <Search />
-                 </IconButton>
-            </FlexBetween>
-
+        {isNonMobileScreens && (
+          <FlexBetween
+            backgroundColor={neutralLight}
+            borderRadius="9px"
+            gap="3rem"
+            padding=" 0.1rem 1.5rem"
+          >
+            <InputBase placeholder="Search..." />
+            <IconButton>
+              <Search />
+            </IconButton>
+          </FlexBetween>
         )}
-
-    </FlexBetween>
-    {isNonMobileScreens ? (
+      </FlexBetween>
+      {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton onClick={() => dispatch(setMode())}>
             {theme.palette.mode === "dark" ? (
@@ -123,8 +128,8 @@ function Navbar() {
           <Menu />
         </IconButton>
       )}
-         
-            {/* MOBILE NAV */}
+
+      {/* MOBILE NAV */}
       {!isNonMobileScreens && isMobileMenuToggled && (
         <Box
           position="fixed"
@@ -196,7 +201,7 @@ function Navbar() {
         </Box>
       )}
     </FlexBetween>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
